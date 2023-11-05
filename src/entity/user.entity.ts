@@ -1,7 +1,7 @@
 import {
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, Generated,
     PrimaryColumn,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -40,7 +40,15 @@ export class UserModel {
 
     // 데이터가 업데이트 될 때마다 1씩 올라간다.
     // 처음 생성되면 값은 1이다.
+    // 정확히는 save() 함수가 몇번 불렸는지 기억한다.
     @VersionColumn()
     version: number;
 
+    @Column()
+    @Generated('increment')
+    additionalId: number;
+
+    @Column()
+    @Generated('uuid')
+    additionalId2: string;
 }
